@@ -21,7 +21,7 @@ class TripletModel(nn.Module):
         self.text_fc2 = nn.Linear(372, 446)
         self.text_fc3 = nn.Linear(446, 512)
 
-    def forward(self, pos_text, pos_image, neg_text, neg_image):
+    def forward(self, pos_image, pos_text, neg_image, neg_text):
         pos_text = F.relu(self.text_fc1(pos_text))
         pos_text = F.relu(self.text_fc2(pos_text))
         pos_text_vec = self.text_fc3(pos_text)
@@ -38,4 +38,4 @@ class TripletModel(nn.Module):
         neg_image = F.relu(self.image_fc2(neg_image))
         neg_image_vec = self.image_fc3(neg_image)
 
-        return pos_text_vec, pos_image_vec, neg_text_vec, neg_image_vec
+        return pos_image_vec, pos_text_vec, neg_image_vec, neg_text_vec
